@@ -1,0 +1,27 @@
+
+
+
+[
+    {
+        "title": "Korea University",
+        "latitude": 37.590978,
+        "longitude": 127.027756
+    },
+    
+    {   "title": "Anam Station",
+        "latitude": 37.586458,
+        "longitude": 127.029115
+        
+    },
+    {
+        "title": "Korea University Dormitory",
+        "latitude": 37.591516,
+        "longitude": 127.029952
+    },
+    {
+        "title": "Korea University Station",
+        "latitude": 37.590597,
+        "longitude": 127.035898
+    }
+    
+]
