@@ -6,6 +6,8 @@ target 'map' do
   use_frameworks!
 
   # Pods for map
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Database'  
 
   target 'mapTests' do
     inherit! :search_paths
