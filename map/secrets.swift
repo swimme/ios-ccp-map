@@ -7,3 +7,4 @@
 //
 
 import Foundation
+public let GOOGLE_API_KEY: String = "AIzaSyAE7U6DsUHDNErX4TcrGYmgUJUqTEvDdz8"
