@@ -94,6 +94,8 @@ iOSInjectionProject/
 
 ## User settings
 ./map/secrets.swift
+./map/secret.swift
+./map/GoogleService-Info.plist
 
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 
