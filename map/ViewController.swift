@@ -12,37 +12,23 @@ import FirebaseDatabase
 
 public let DATUM_POINT = CLLocation(latitude: 37.591516, longitude: 127.029952)
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, GMSMapViewDelegate {
     
     // MARK: Properties
     @IBOutlet var mapView: GMSMapView!
     
-    var database: DatabaseReference!
+    // database
+    var database: DatabaseReference = Database.database().reference()
     var databaseHandler: DatabaseHandle!
     let databaseName: String = "0"
     let recordName: String = "objects"
     var objects: [[String:Int]]! = []
     
-   // MARK: connect Database
-    func configureDatabase() {
-        database = Database.database().reference()
-        databaseHandler = database.child(databaseName).child(recordName)
-            .observe(.value, with: { (snapshot) -> Void in
-                guard let records = snapshot.value as? [[String: Any]] else { return }
-                
-                // MARK: show Markers
-                for record in records{
-                    guard let object = record["relative_coordinates"] as? [String: Int], let lat = object["top_y"], let long = object["left_x"] else {return }
-                    let scale: Double = 0.000002 // 축척
-                    let marker: GMSMarker = GMSMarker()
-                    let realLat = Double(lat) * scale
-                    let realLong = Double(long) * scale
-                    let position: CLLocationCoordinate2D = CLLocationCoordinate2D( latitude: DATUM_POINT.coordinate.latitude-realLat, longitude: DATUM_POINT.coordinate.longitude+realLong)
-                    marker.position = position
-                    marker.map = self.view as? GMSMapView
-                }
-            })
-    }
+    // marker handling
+    var tappedMarker: GMSMarker?
+    var customInfoWindow: CustomInfoWindow?
+    var markerIndex: Int = 0 // marker key for updates
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,8 +44,14 @@ class ViewController: UIViewController {
         mapView.settings.compassButton = true
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
+        mapView.delegate = self
         
         configureDatabase()
+        
+        //track tappedMarker
+        self.tappedMarker = GMSMarker()
+        self.customInfoWindow = CustomInfoWindow().loadView()
+        
         
         //TODO: polylines
         //        var list = [CLLocationCoordinate2D]()
@@ -78,6 +70,102 @@ class ViewController: UIViewController {
         //            line.strokeWidth = 3.0
         //            line.map = mapView
     }
+    
+    //MARK: Load Data
+    func configureDatabase() {
+//        database = Database.database().reference()
+        databaseHandler = self.database.child(databaseName).child(recordName)
+            .observe(.value, with: { (snapshot) -> Void in
+                guard let records = snapshot.value as? [[String: Any]] else { return }
+                
+                // show Markers
+                for record in records{
+                    guard let object = record["relative_coordinates"] as? [String: Int], let lat = object["top_y"], let long = object["left_x"] else {return }
+                    
+                    let scale: Double = 0.000002 // 축척
+                    let marker: GMSMarker = GMSMarker()
+                    let realLat = Double(lat) * scale
+                    let realLong = Double(long) * scale
+                    let position: CLLocationCoordinate2D = CLLocationCoordinate2D( latitude: DATUM_POINT.coordinate.latitude-realLat, longitude: DATUM_POINT.coordinate.longitude+realLong)
+                    marker.position = position
+                    marker.title = record["name"] as? String
+                    
+                    //TODO: fix logic..
+                    marker.snippet = "\(self.markerIndex)"
+                    self.markerIndex += 1
+                    
+                    if let isDeleted: Int = record["isDeleted"] as? Int {
+                        if (isDeleted == 1){
+                            marker.icon = GMSMarker.markerImage(with: UIColor.lightGray)
+                            marker.isTappable = false
+                        }
+                    }
+                    marker.map = self.view as? GMSMapView
+                    print(self.markerIndex)
+                }
+                self.markerIndex  = 0
+            }) { (error) in
+                print(error.localizedDescription) //db server error
+        }
+       
+    }
+    
+    //MARK: Custom MarkerInfo window
+    //empty default
+    func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
+        return UIView()
+    }
+    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        print("marker was tapped")
+        tappedMarker = marker
+        
+        customInfoWindow?.customWindowLabel.text = marker.title
+        
+        let opaqueWhite = UIColor(white: 1, alpha: 0.85)
+        customInfoWindow?.layer.backgroundColor = opaqueWhite.cgColor
+        customInfoWindow?.layer.cornerRadius = 8
+        
+        customInfoWindow?.customWindowButton.addTarget(self, action: #selector(self.press), for: .touchUpInside)
+
+        self.view.addSubview(customInfoWindow!)
+        
+        return false
+    }
+    
+    // disable marker
+    @objc func press(_ sender: UIButton) {
+        let markerId: String! = tappedMarker?.snippet
+        let updates: [String:Any] = ["isDeleted":1]
+        
+        //alert
+        let alert = UIAlertController(title: "쓰레기를 수거하셨나요?", message: "확인 버튼을 누르면 마커가 비활성화됩니다.", preferredStyle: UIAlertController.Style.alert)
+        let okAction = UIAlertAction(title: "확인", style: .default){ (action) in
+            self.database.child(self.databaseName).child(self.recordName).child(markerId).updateChildValues(updates)
+            self.customInfoWindow?.removeFromSuperview()
+            //TODO: reload - marker color change, untouchable
+            self.tappedMarker?.icon = GMSMarker.markerImage(with: UIColor.lightGray)
+            self.tappedMarker?.isTappable = false
+        }
+        let cancel = UIAlertAction(title: "취소", style: .destructive, handler : nil)
+        alert.addAction(cancel)
+        alert.addAction(okAction)
+        
+        present(alert, animated: true)
+    }
+
+    //follow marker
+    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
+        let position = tappedMarker?.position
+        customInfoWindow?.center = mapView.projection.point(for: position!)
+        customInfoWindow?.center.y -= 140
+    }
+    
+    //close event
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+        customInfoWindow?.removeFromSuperview()
+    }
+    
     
 }
 
