@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>101443781124-ngtrp35p0longr0mq8ifg4m3pusv6pac.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.101443781124-ngtrp35p0longr0mq8ifg4m3pusv6pac</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDcOiplCxe4Die1UXjvNKNSutrEs2u1K0c</string>
+	<key>GCM_SENDER_ID</key>
+	<string>101443781124</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>CCP.map</string>
+	<key>PROJECT_ID</key>
+	<string>ccpmap-61789</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ccpmap-61789.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:101443781124:ios:520e5b92c66cb82db1eb51</string>
+	<key>DATABASE_URL</key>
+	<string>https://ccpmap-61789.firebaseio.com</string>
+</dict>
+</plist>
