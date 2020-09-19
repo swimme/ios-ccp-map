@@ -10,7 +10,8 @@ import GoogleMaps
 import GooglePlaces
 import FirebaseDatabase
 
-public let DATUM_POINT = CLLocation(latitude: 37.591516, longitude: 127.029952)
+
+public let DATUM_POINT = CLLocation(latitude: 37.522979, longitude: 126.955416)
 
 class ViewController: UIViewController, GMSMapViewDelegate {
     
@@ -35,7 +36,7 @@ class ViewController: UIViewController, GMSMapViewDelegate {
         print("did load")
         
         // inital camera frame
-        let camera = GMSCameraPosition.camera(withLatitude: 37.591516, longitude: 127.029952, zoom: 14.5)
+        let camera = GMSCameraPosition.camera(withLatitude: DATUM_POINT.coordinate.latitude, longitude: DATUM_POINT.coordinate.longitude, zoom: 14.5)
         
         //초기 설정 (editing 필요 x)
         let rect = CGRect(origin: .zero, size: CGSize(width: 100, height: 100))
@@ -88,9 +89,9 @@ class ViewController: UIViewController, GMSMapViewDelegate {
                     let realLong = Double(long) * scale
                     let position: CLLocationCoordinate2D = CLLocationCoordinate2D( latitude: DATUM_POINT.coordinate.latitude-realLat, longitude: DATUM_POINT.coordinate.longitude+realLong)
                     marker.position = position
-                    marker.title = record["name"] as? String
+//                    marker.snippet = record["class_id"] as? String
                     
-                    //TODO: fix logic..
+                    //TODO: fix logic..? object id
                     marker.snippet = "\(self.markerIndex)"
                     self.markerIndex += 1
                     
@@ -120,52 +121,70 @@ class ViewController: UIViewController, GMSMapViewDelegate {
         print("marker was tapped")
         tappedMarker = marker
         
-        customInfoWindow?.customWindowLabel.text = marker.title
+        // customInfoWindow 삭제-> 바로 button으로 수정
+        //        customInfoWindow?.customWindowLabel.text = marker.title
+        //        let opaqueWhite = UIColor(white: 1, alpha: 0.85)
+        //        customInfoWindow?.layer.backgroundColor = opaqueWhite.cgColor
+        //        customInfoWindow?.layer.cornerRadius = 8
+        //        customInfoWindow?.customWindowButton.addTarget(self, action: #selector(self.press), for: .touchUpInside)
+        //        self.view.addSubview(customInfoWindow!)
         
-        let opaqueWhite = UIColor(white: 1, alpha: 0.85)
-        customInfoWindow?.layer.backgroundColor = opaqueWhite.cgColor
-        customInfoWindow?.layer.cornerRadius = 8
-        
-        customInfoWindow?.customWindowButton.addTarget(self, action: #selector(self.press), for: .touchUpInside)
-
-        self.view.addSubview(customInfoWindow!)
-        
-        return false
-    }
-    
-    // disable marker
-    @objc func press(_ sender: UIButton) {
         let markerId: String! = tappedMarker?.snippet
         let updates: [String:Any] = ["isDeleted":1]
-        
-        //alert
         let alert = UIAlertController(title: "쓰레기를 수거하셨나요?", message: "확인 버튼을 누르면 마커가 비활성화됩니다.", preferredStyle: UIAlertController.Style.alert)
         let okAction = UIAlertAction(title: "확인", style: .default){ (action) in
             self.database.child(self.databaseName).child(self.recordName).child(markerId).updateChildValues(updates)
-            self.customInfoWindow?.removeFromSuperview()
-            //TODO: reload - marker color change, untouchable
+//            self.customInfoWindow?.removeFromSuperview()
+            
+            //TODO: reload logic re
             self.tappedMarker?.icon = GMSMarker.markerImage(with: UIColor.lightGray)
             self.tappedMarker?.isTappable = false
+            print("reload?")
+            mapView.clear()
         }
         let cancel = UIAlertAction(title: "취소", style: .destructive, handler : nil)
         alert.addAction(cancel)
         alert.addAction(okAction)
         
         present(alert, animated: true)
-    }
-
-    //follow marker
-    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
-        let position = tappedMarker?.position
-        customInfoWindow?.center = mapView.projection.point(for: position!)
-        customInfoWindow?.center.y -= 140
+        
+        return false
     }
     
-    //close event
-    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
-        customInfoWindow?.removeFromSuperview()
-    }
-    
+    /* button logic in customInfoWindow
+      // disable marker
+      @objc func press(_ sender: UIButton) {
+          let markerId: String! = tappedMarker?.snippet
+          let updates: [String:Any] = ["isDeleted":1]
+          
+          //alert
+          let alert = UIAlertController(title: "쓰레기를 수거하셨나요?", message: "확인 버튼을 누르면 마커가 비활성화됩니다.", preferredStyle: UIAlertController.Style.alert)
+          let okAction = UIAlertAction(title: "확인", style: .default){ (action) in
+              self.database.child(self.databaseName).child(self.recordName).child(markerId).updateChildValues(updates)
+              self.customInfoWindow?.removeFromSuperview()
+              
+              self.tappedMarker?.icon = GMSMarker.markerImage(with: UIColor.lightGray)
+              self.tappedMarker?.isTappable = false
+          }
+          let cancel = UIAlertAction(title: "취소", style: .destructive, handler : nil)
+          alert.addAction(cancel)
+          alert.addAction(okAction)
+          
+          present(alert, animated: true)
+      }
+     
+         //follow marker
+     //    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
+     //        let position = tappedMarker?.position
+     //        customInfoWindow?.center = mapView.projection.point(for: position!)
+     //        customInfoWindow?.center.y -= 140
+     //    }
+         
+         //close event
+     //    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+     //        customInfoWindow?.removeFromSuperview()
+     //    }
+    */
     
 }
 
