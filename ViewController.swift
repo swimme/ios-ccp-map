@@ -77,12 +77,13 @@ class ViewController: UIViewController, GMSMapViewDelegate {
                 let position: CLLocationCoordinate2D = CLLocationCoordinate2D( latitude: lat as! CLLocationDegrees, longitude: long  as! CLLocationDegrees)
                 marker.position = position
                 
-//                guard let markerId: Int = record["id"] as? Int else { return }
-//                marker.snippet = String(markerId)
+                guard let markerId: Int = record["id"] as? Int else { return }
+                marker.snippet = String(markerId)
+                marker.icon  = UIImage(named: "trash")
 
                 if let isDeleted: Int = record["isDeleted"] as? Int {
                     if (isDeleted == 1){
-                        marker.icon = GMSMarker.markerImage(with: UIColor.lightGray)
+                        marker.icon  = UIImage(named: "untrash")
                         marker.isTappable = false
                     }
                 }
@@ -123,11 +124,12 @@ class ViewController: UIViewController, GMSMapViewDelegate {
         
         let okAction = UIAlertAction(title: "확인", style: .default){ (action) in
             //db update
-            self.database.child(self.databaseName).queryOrdered(byChild: "class_id").queryEqual(toValue: Int(markerId)).observeSingleEvent(of: .childAdded) { (snapshot) in
+            self.database.child(self.databaseName).queryOrdered(byChild: "id").queryEqual(toValue: Int(markerId)).observeSingleEvent(of: .childAdded) { (snapshot) in
                 let newRef = snapshot.ref.child("isDeleted")
                 newRef.setValue(true)
             }
-            self.tappedMarker?.icon = GMSMarker.markerImage(with: UIColor.lightGray)
+//            self.tappedMarker?.icon = GMSMarker.markerImage(with: UIColor.lightGray)
+            self.tappedMarker?.icon  = UIImage(named: "untrash")
             self.tappedMarker?.isTappable = false
         }
 
@@ -155,7 +157,7 @@ class ViewController: UIViewController, GMSMapViewDelegate {
     @IBAction func buttonClicked(_ sender: UIButton) {
         if (!showPolyline) {
             polyline = GMSPolyline(path: self.path)
-            polyline!.strokeColor = UIColor(red: 0, green: 191/255.0, blue: 1, alpha: 0.8)
+            polyline!.strokeColor = UIColor(displayP3Red:115/255, green: 200/255 , blue:  153/255, alpha: 1)
             polyline!.strokeWidth = 5
             polyline!.map = self.view as? GMSMapView
             showPolyline = true
@@ -172,5 +174,14 @@ extension ViewController: CLLocationManagerDelegate {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         print("locations = \(locValue.latitude) \(locValue.longitude)")
     }
+}
+
+func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+    return UIColor(
+        red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+        green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+        blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+        alpha: CGFloat(1.0)
+    )
 }
 
