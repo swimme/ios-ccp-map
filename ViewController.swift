@@ -10,9 +10,14 @@ import GoogleMaps
 import GooglePlaces
 import FirebaseDatabase
 
-struct A{
+struct Path{
     static var positionArray = Array<CLLocationCoordinate2D>()
 }
+
+struct Markers{
+    static var markerArray = Array<GMSMarker>()
+}
+
 
 public let DATUM_POINT = CLLocation(latitude: 37.590597, longitude: 127.035898)
 
@@ -27,6 +32,7 @@ class ViewController: UIViewController, GMSMapViewDelegate {
     var databaseHandler: DatabaseHandle!
     let databaseName: String = "cities"
     var objects: [[String:Int]]! = []
+    var recordCount: Int = 0
 
     // marker handler
     var tappedMarker: GMSMarker?
@@ -39,7 +45,7 @@ class ViewController: UIViewController, GMSMapViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // inital camera frame
         let camera = GMSCameraPosition.camera(withLatitude: DATUM_POINT.coordinate.latitude, longitude: DATUM_POINT.coordinate.longitude, zoom: 14.5)
 
@@ -60,47 +66,68 @@ class ViewController: UIViewController, GMSMapViewDelegate {
         // add path button
         pathButton = createCustomButton()
         self.view.addSubview(pathButton)
-        
-        // :CLUSTER
     }
 
+    func drawPath(){
+      self.path = GMSMutablePath()
+      for marker in Markers.markerArray{
+        self.path?.add(marker.position)
+      }
+      self.polyline = GMSPolyline(path: self.path)
+      self.polyline!.strokeColor = UIColor(displayP3Red:115/255, green: 200/255 , blue:  153/255, alpha: 1)
+      self.polyline!.strokeWidth = 5
+    }
+    
+    func updatePath() {
+        var count = 0
+        for marker in Markers.markerArray{
+            marker.accessibilityValue = String(count) //path Index
+            count = count+1
+        }
+    }
+    
     //MARK: Load Data
     func configureDatabase() {
         databaseHandler = self.database.child(databaseName).observe(.value, with: { (snapshot) -> Void in
             guard let records = snapshot.value as? [[String: Any]] else { return }
             
-            // show Markers
+            if (records.count == self.recordCount){
+                print("all")
+                return
+            }
+            
+            //init
+            var count = 0
+//            Path.positionArray.removeAll()
+            Markers.markerArray.removeAll()
+            
             for record in records{
+                self.recordCount+=1
                 guard let lat = record["latitude"], let long = record["longitude"] else {return }
-
+               
                 let marker: GMSMarker = GMSMarker()
                 let position: CLLocationCoordinate2D = CLLocationCoordinate2D( latitude: lat as! CLLocationDegrees, longitude: long  as! CLLocationDegrees)
-                marker.position = position
                 
                 guard let markerId: Int = record["id"] as? Int else { return }
+                marker.position = position
                 marker.snippet = String(markerId)
-                marker.icon  = UIImage(named: "trash")
 
-                if let isDeleted: Int = record["isDeleted"] as? Int {
-                    if (isDeleted == 1){
-                        marker.icon  = UIImage(named: "untrash")
-                        marker.isTappable = false
-                    }
+                if let _:Int = record["isDeleted"] as? Int {
+                     marker.icon = UIImage(named: "untrash")
+                     marker.isTappable = false
+                }else{
+                     Markers.markerArray.append(marker)
+//                     Path.positionArray.append(position)
+                     marker.accessibilityValue = String(count) //path Index
+                     marker.icon  = UIImage(named: "trash")
+                     count+=1
                 }
-                // cluster - not here
-//                self.clusterManager.add(marker)
-                marker.map = self.view as? GMSMapView
                 
-                // path 추가
-                A.positionArray.append(position)
+//                print(markerId, marker.accessibilityValue)
+                marker.map = self.view as? GMSMapView
             }
             print(records.count)
-            
-            // path 설정
-            self.path = GMSMutablePath()
-            for position in A.positionArray{
-                self.path?.add(position)
-            }
+            self.drawPath()
             
         }) { (error) in
             print(error.localizedDescription)
@@ -112,27 +139,35 @@ class ViewController: UIViewController, GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
         return UIView()
     }
-
+    
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        // :CLUSTER
-        // check if a cluster icon was tapped
-        print("marker was tapped")
-        
         tappedMarker = marker
         let markerId: String! = tappedMarker?.snippet
+        let pathId: String! = self.tappedMarker?.accessibilityValue
+//        print("tapped",markerId,pathId)
+
         let alert = UIAlertController(title: "쓰레기를 수거하셨나요?", message: "확인 버튼을 누르면 마커가 비활성화됩니다.", preferredStyle: UIAlertController.Style.alert)
         
         let okAction = UIAlertAction(title: "확인", style: .default){ (action) in
-            //db update
-            self.database.child(self.databaseName).queryOrdered(byChild: "id").queryEqual(toValue: Int(markerId)).observeSingleEvent(of: .childAdded) { (snapshot) in
-                let newRef = snapshot.ref.child("isDeleted")
-                newRef.setValue(true)
-            }
-//            self.tappedMarker?.icon = GMSMarker.markerImage(with: UIColor.lightGray)
             self.tappedMarker?.icon  = UIImage(named: "untrash")
             self.tappedMarker?.isTappable = false
-        }
 
+            //delete
+            if let id: Int = Int(markerId){
+                self.database.child(self.databaseName).child(String(id-1)).updateChildValues(["isDeleted":1])
+                if let index: Int = Int(pathId){
+//                    Path.positionArray.remove(at: index)
+                    Markers.markerArray.remove(at: index)
+                }
+            }
+            
+            //update path
+            self.updatePath()
+            self.polyline?.map = nil
+            self.showPolyline = false
+            self.drawPath()
+        }
+        
         let cancel = UIAlertAction(title: "취소", style: .destructive, handler : nil)
         alert.addAction(cancel)
         alert.addAction(okAction)
@@ -141,11 +176,13 @@ class ViewController: UIViewController, GMSMapViewDelegate {
         return false
     }
 
+    
     //MARK : SHOW PATH BUTTON
     func createCustomButton() -> UIButton? {
         let button: UIButton = UIButton(type: UIButton.ButtonType.roundedRect)
         button.frame = CGRect(x: 290, y: 550, width: 50, height: 36)
-        button.setTitle("Btn", for: UIControl.State.normal)
+        button.setTitle("길찾기", for: UIControl.State.normal)
+//        button.setImage(<#T##image: UIImage?##UIImage?#>, for: <#T##UIControl.State#>)
         button.layer.cornerRadius = 5.0;
         button.backgroundColor = UIColor.white
         button.tintColor = UIColor.black
@@ -153,18 +190,15 @@ class ViewController: UIViewController, GMSMapViewDelegate {
 
         return button
     }
-
+    
     @IBAction func buttonClicked(_ sender: UIButton) {
         if (!showPolyline) {
-            polyline = GMSPolyline(path: self.path)
-            polyline!.strokeColor = UIColor(displayP3Red:115/255, green: 200/255 , blue:  153/255, alpha: 1)
-            polyline!.strokeWidth = 5
-            polyline!.map = self.view as? GMSMapView
+            self.polyline?.map = self.view as? GMSMapView
             showPolyline = true
             return
         }
+        self.polyline?.map = nil
         showPolyline = false
-        polyline!.map = nil
     }
 }
 
@@ -175,13 +209,3 @@ extension ViewController: CLLocationManagerDelegate {
         print("locations = \(locValue.latitude) \(locValue.longitude)")
     }
 }
-
-func UIColorFromRGB(rgbValue: UInt) -> UIColor {
-    return UIColor(
-        red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-        green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-        blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-        alpha: CGFloat(1.0)
-    )
-}
-
