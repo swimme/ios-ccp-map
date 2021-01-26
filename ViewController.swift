@@ -187,14 +187,15 @@ class ViewController: UIViewController, GMSMapViewDelegate {
     //MARK : SHOW PATH BUTTON
     func createCustomButton() -> UIButton? {
         let button: UIButton = UIButton(type: UIButton.ButtonType.roundedRect)
-        button.frame = CGRect(x: 290, y: 550, width: 50, height: 36)
-        button.setTitle("길찾기", for: UIControl.State.normal)
-//        button.setImage(<#T##image: UIImage?##UIImage?#>, for: <#T##UIControl.State#>)
-        button.layer.cornerRadius = 5.0;
-        button.backgroundColor = UIColor.white
-        button.tintColor = UIColor.black
+        button.frame = CGRect(x: 309, y: 535, width: 57, height: 60)
+        if let image = UIImage(named: "path3") {
+            button.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+        button.imageView?.clipsToBounds = true
+        button.imageView?.layer.masksToBounds = true
+        button.imageView?.layer.cornerRadius = 12
         button.addTarget(self, action: #selector(buttonClicked(_:)), for: .touchUpInside)
-
+        //        button.backgroundColor = UIColor(displayP3Red:64/255, green: 179/255 , blue:  112/255, alpha: 1)
         return button
     }
     
