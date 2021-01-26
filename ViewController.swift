@@ -18,6 +18,7 @@ struct Markers{
     static var markerArray = Array<GMSMarker>()
 }
 
+var distance: Double = 0
 
 public let DATUM_POINT = CLLocation(latitude: 37.590597, longitude: 127.035898)
 
@@ -109,10 +110,16 @@ class ViewController: UIViewController, GMSMapViewDelegate {
             var count = 0
             Markers.markerArray.removeAll()
             
+            
             for record in records{
-                self.recordCount+=1
-                guard let lat = record["latitude"], let long = record["longitude"] else {return }
-               
+                guard let lat = record["latitude"], let long = record["longitude"], let distance = record["total_distance"] else {return }
+                let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+                label.center = CGPoint(x: 110, y: 40)
+                label.textAlignment = .center
+                    
+                label.text = "최단경로 거리: \(distance) 미터"
+                self.view.addSubview(label)
+
                 let marker: GMSMarker = GMSMarker()
                 let position: CLLocationCoordinate2D = CLLocationCoordinate2D( latitude: lat as! CLLocationDegrees, longitude: long  as! CLLocationDegrees)
                 
