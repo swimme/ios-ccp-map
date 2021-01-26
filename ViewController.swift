@@ -79,13 +79,20 @@ class ViewController: UIViewController, GMSMapViewDelegate {
     }
 
     func drawPath(){
-      self.path = GMSMutablePath()
-      for marker in Markers.markerArray{
-        self.path?.add(marker.position)
-      }
-      self.polyline = GMSPolyline(path: self.path)
-      self.polyline!.strokeColor = UIColor(displayP3Red:115/255, green: 200/255 , blue:  153/255, alpha: 1)
-      self.polyline!.strokeWidth = 5
+        self.path = GMSMutablePath()
+
+        for marker in Markers.markerArray{
+            self.path?.add(marker.position)
+        }
+        
+        self.polyline?.map = nil
+        self.polyline = GMSPolyline(path: self.path)
+        self.polyline!.strokeColor = UIColor(displayP3Red:115/255, green: 200/255 , blue:  153/255, alpha: 1)
+        self.polyline!.strokeWidth = 5
+        
+        if (self.showPolyline){
+            self.polyline?.map = self.view as? GMSMapView
+        }
     }
     
     func updatePath() {
@@ -112,7 +119,9 @@ class ViewController: UIViewController, GMSMapViewDelegate {
             
             
             for record in records{
+                self.recordCount+=1
                 guard let lat = record["latitude"], let long = record["longitude"], let distance = record["total_distance"] else {return }
+                
                 let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
                 label.center = CGPoint(x: 110, y: 40)
                 label.textAlignment = .center
@@ -174,10 +183,9 @@ class ViewController: UIViewController, GMSMapViewDelegate {
             
             //update path
             self.updatePath()
-            self.polyline?.map = nil
-            self.showPolyline = false
             self.drawPath()
         }
+            
         
         let cancel = UIAlertAction(title: "취소", style: .destructive, handler : nil)
         alert.addAction(cancel)
