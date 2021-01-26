@@ -1,29 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MmS-qH-Vm6">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="NanumBarunpenRegular.ttf">
+            <string>NanumBarunpen</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mapView" id="BYZ-38-t0r" customClass="ViewController" customModule="map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="sSX-4l-Feu"/>
                     <connections>
                         <outlet property="mapView" destination="8bC-Xf-vdC" id="frN-0T-Ufo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-280" y="109"/>
+            <point key="canvasLocation" x="397" y="121"/>
+        </scene>
+        <!--Init View Controller-->
+        <scene sceneID="Pq7-Kb-W5f">
+            <objects>
+                <viewController id="sWJ-qb-2Zw" customClass="InitViewController" customModule="map" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Kes-Tp-nLb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="©한깡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUb-3n-pWC">
+                                <rect key="frame" x="185.5" y="792" width="43.5" height="20"/>
+                                <fontDescription key="fontDescription" name="NanumBarunpen" family="NanumBarunpen" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="환경 미화원ver." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4x-iD-yd4">
+                                <rect key="frame" x="155" y="761" width="168.5" height="23"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="한강 쓰레기 한눈에 보기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S39-25-9ss">
+                                <rect key="frame" x="91" y="180" width="233" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="한눈" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g53-cq-OC6">
+                                <rect key="frame" x="155" y="232" width="104" height="72"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="60"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.23865189076466911" green="0.63830819126580307" blue="0.52299638394169512" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="g53-cq-OC6" firstAttribute="centerX" secondItem="vUb-3n-pWC" secondAttribute="centerX" id="3nE-cN-nOU"/>
+                            <constraint firstItem="D4x-iD-yd4" firstAttribute="centerX" secondItem="vUb-3n-pWC" secondAttribute="centerX" constant="32.25" id="HDW-8R-ZZi"/>
+                            <constraint firstItem="vUb-3n-pWC" firstAttribute="centerX" secondItem="chv-Nx-UDA" secondAttribute="centerX" id="cd6-7j-ygA"/>
+                            <constraint firstItem="D4x-iD-yd4" firstAttribute="leading" secondItem="chv-Nx-UDA" secondAttribute="leading" constant="155" id="f8Y-ef-LVb"/>
+                            <constraint firstItem="g53-cq-OC6" firstAttribute="centerX" secondItem="S39-25-9ss" secondAttribute="centerX" constant="-0.5" id="gtz-57-Lou"/>
+                            <constraint firstItem="S39-25-9ss" firstAttribute="top" secondItem="g53-cq-OC6" secondAttribute="bottom" constant="-124" id="ncD-Q9-uJn"/>
+                            <constraint firstItem="vUb-3n-pWC" firstAttribute="top" secondItem="D4x-iD-yd4" secondAttribute="bottom" constant="8" id="oT9-ok-lrs"/>
+                            <constraint firstItem="chv-Nx-UDA" firstAttribute="bottom" secondItem="vUb-3n-pWC" secondAttribute="bottom" constant="50" id="wxK-N9-Hdv"/>
+                            <constraint firstItem="g53-cq-OC6" firstAttribute="top" secondItem="chv-Nx-UDA" secondAttribute="top" constant="188" id="xf7-by-tbf"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="chv-Nx-UDA"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="PTw-no-ebr"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DnY-jA-xRx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-533.33333333333337" y="120.53571428571428"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="fUn-y7-QH4">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="MmS-qH-Vm6" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6H4-RZ-g5h">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="sWJ-qb-2Zw" kind="relationship" relationship="rootViewController" id="2HX-jf-ibL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H6C-GD-aUM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1414" y="121"/>
         </scene>
     </scenes>
+    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>
