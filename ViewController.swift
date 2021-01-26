@@ -66,6 +66,15 @@ class ViewController: UIViewController, GMSMapViewDelegate {
         // add path button
         pathButton = createCustomButton()
         self.view.addSubview(pathButton)
+        
+        // layoout constraints
+        pathButton.translatesAutoresizingMaskIntoConstraints = false
+        pathButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
+        pathButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100).isActive = true
+        pathButton.heightAnchor.constraint(equalToConstant: 70)
+             .isActive = true // ---- 3
+        pathButton.widthAnchor.constraint(equalToConstant: 70)
+             .isActive = true // ---- 4
     }
 
     func drawPath(){
@@ -98,7 +107,6 @@ class ViewController: UIViewController, GMSMapViewDelegate {
             
             //init
             var count = 0
-//            Path.positionArray.removeAll()
             Markers.markerArray.removeAll()
             
             for record in records{
@@ -117,13 +125,11 @@ class ViewController: UIViewController, GMSMapViewDelegate {
                      marker.isTappable = false
                 }else{
                      Markers.markerArray.append(marker)
-//                     Path.positionArray.append(position)
                      marker.accessibilityValue = String(count) //path Index
-                     marker.icon  = UIImage(named: "trash")
+                     marker.icon  = UIImage(named: "newtrash")
                      count+=1
                 }
                 
-//                print(markerId, marker.accessibilityValue)
                 marker.map = self.view as? GMSMapView
             }
             print(records.count)
@@ -144,7 +150,6 @@ class ViewController: UIViewController, GMSMapViewDelegate {
         tappedMarker = marker
         let markerId: String! = tappedMarker?.snippet
         let pathId: String! = self.tappedMarker?.accessibilityValue
-//        print("tapped",markerId,pathId)
 
         let alert = UIAlertController(title: "쓰레기를 수거하셨나요?", message: "확인 버튼을 누르면 마커가 비활성화됩니다.", preferredStyle: UIAlertController.Style.alert)
         
@@ -156,7 +161,6 @@ class ViewController: UIViewController, GMSMapViewDelegate {
             if let id: Int = Int(markerId){
                 self.database.child(self.databaseName).child(String(id-1)).updateChildValues(["isDeleted":1])
                 if let index: Int = Int(pathId){
-//                    Path.positionArray.remove(at: index)
                     Markers.markerArray.remove(at: index)
                 }
             }
@@ -180,14 +184,14 @@ class ViewController: UIViewController, GMSMapViewDelegate {
     //MARK : SHOW PATH BUTTON
     func createCustomButton() -> UIButton? {
         let button: UIButton = UIButton(type: UIButton.ButtonType.roundedRect)
-        button.frame = CGRect(x: 309, y: 535, width: 57, height: 60)
-        if let image = UIImage(named: "path3") {
+        if let image = UIImage(named: "pathnew") {
             button.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
         }
         button.imageView?.clipsToBounds = true
         button.imageView?.layer.masksToBounds = true
-        button.imageView?.layer.cornerRadius = 12
+        button.imageView?.layer.cornerRadius = 25
         button.addTarget(self, action: #selector(buttonClicked(_:)), for: .touchUpInside)
+        //        button.frame = CGRect(x: 309, y: 535, width: 70, height: 70)
         //        button.backgroundColor = UIColor(displayP3Red:64/255, green: 179/255 , blue:  112/255, alpha: 1)
         return button
     }
