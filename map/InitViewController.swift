@@ -22,7 +22,7 @@ class InitViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(myMethod), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(myMethod), userInfo: nil, repeats: false)
 
     }
 
