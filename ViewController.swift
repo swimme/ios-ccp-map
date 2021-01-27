@@ -18,15 +18,12 @@ struct Markers{
     static var markerArray = Array<GMSMarker>()
 }
 
-var distance: Double = 0
-
 public let DATUM_POINT = CLLocation(latitude: 37.590597, longitude: 127.035898)
 
 class ViewController: UIViewController, GMSMapViewDelegate {
 
     // MARK: Properties
     @IBOutlet var mapView: GMSMapView!
-    var pathButton: UIButton!
     
     // database
     var database: DatabaseReference = Database.database().reference()
@@ -43,6 +40,8 @@ class ViewController: UIViewController, GMSMapViewDelegate {
     var path:GMSMutablePath?
     var polyline: GMSPolyline?
     var showPolyline: Bool = false
+    var distance: Double = 0
+    var pathLabel: UILabel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,26 +57,18 @@ class ViewController: UIViewController, GMSMapViewDelegate {
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
         mapView.delegate = self
-
+  
         configureDatabase()
 
         // track tappedMarker
         self.tappedMarker = GMSMarker()
         
         // add path button
-        pathButton = createCustomButton()
-        self.view.addSubview(pathButton)
+        createPathButton()
+        pathLabel = createPathLabel()
         
-        // layoout constraints
-        pathButton.translatesAutoresizingMaskIntoConstraints = false
-        pathButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
-        pathButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100).isActive = true
-        pathButton.heightAnchor.constraint(equalToConstant: 70)
-             .isActive = true // ---- 3
-        pathButton.widthAnchor.constraint(equalToConstant: 70)
-             .isActive = true // ---- 4
     }
-
+    
     func drawPath(){
         self.path = GMSMutablePath()
 
@@ -117,18 +108,12 @@ class ViewController: UIViewController, GMSMapViewDelegate {
             var count = 0
             Markers.markerArray.removeAll()
             
-            
             for record in records{
                 self.recordCount+=1
-                guard let lat = record["latitude"], let long = record["longitude"], let distance = record["total_distance"] else {return }
+                guard let lat = record["latitude"], let long = record["longitude"], let distance = record["total_distance"] as? String else {return }
+                guard let totalDistance = Double(distance) else {return}
+                self.distance = totalDistance
                 
-                let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
-                label.center = CGPoint(x: 110, y: 40)
-                label.textAlignment = .center
-                    
-                label.text = "최단경로 거리: \(distance) 미터"
-                self.view.addSubview(label)
-
                 let marker: GMSMarker = GMSMarker()
                 let position: CLLocationCoordinate2D = CLLocationCoordinate2D( latitude: lat as! CLLocationDegrees, longitude: long  as! CLLocationDegrees)
                 
@@ -150,6 +135,7 @@ class ViewController: UIViewController, GMSMapViewDelegate {
             }
             print(records.count)
             self.drawPath()
+            self.pathLabel?.text = "최단경로 거리: \(self.distance) 미터"
             
         }) { (error) in
             print(error.localizedDescription)
@@ -197,7 +183,7 @@ class ViewController: UIViewController, GMSMapViewDelegate {
 
     
     //MARK : SHOW PATH BUTTON
-    func createCustomButton() -> UIButton? {
+    func createPathButton() {
         let button: UIButton = UIButton(type: UIButton.ButtonType.roundedRect)
         if let image = UIImage(named: "pathnew") {
             button.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
@@ -208,7 +194,40 @@ class ViewController: UIViewController, GMSMapViewDelegate {
         button.addTarget(self, action: #selector(buttonClicked(_:)), for: .touchUpInside)
         //        button.frame = CGRect(x: 309, y: 535, width: 70, height: 70)
         //        button.backgroundColor = UIColor(displayP3Red:64/255, green: 179/255 , blue:  112/255, alpha: 1)
-        return button
+
+        self.view.addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
+        button.topAnchor.constraint(equalTo: view.topAnchor, constant: 65).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 70).isActive = true
+//        button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100).isActive = true
+    }
+    
+    func createPathLabel()-> UILabel? {
+//        let label: UILabel = UILabel(frame: CGRect(x: 20, y: 25, width: 200, height: 30))
+        let label: UILabel = UILabel()
+        label.backgroundColor = UIColor.white
+        label.center = CGPoint(x: 110, y: 40)
+        label.textAlignment = .center
+        label.text = "최단경로 거리: \(self.distance) 미터"
+        label.layer.cornerRadius = 5
+        label.tintColor = UIColor.darkGray
+        
+        self.view.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
+        label.topAnchor.constraint(equalTo: view.topAnchor, constant: 80).isActive = true
+        label.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -90).isActive = true
+        label.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        
+        label.layer.shadowColor = UIColor.gray.cgColor
+        label.layer.shadowRadius = 2.0
+        label.layer.shadowOpacity = 0.5
+        label.layer.shadowOffset = CGSize(width: 4, height: 4)
+        label.layer.masksToBounds = false // true: round
+        
+        return label
     }
     
     @IBAction func buttonClicked(_ sender: UIButton) {
