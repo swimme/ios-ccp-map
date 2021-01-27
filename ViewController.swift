@@ -41,7 +41,6 @@ class ViewController: UIViewController, GMSMapViewDelegate {
     var polyline: GMSPolyline?
     var showPolyline: Bool = false
     var distance: Double = 0
-    var pathLabel: UILabel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,8 +64,6 @@ class ViewController: UIViewController, GMSMapViewDelegate {
         
         // add path button
         createPathButton()
-        pathLabel = createPathLabel()
-        
     }
     
     func drawPath(){
@@ -135,7 +132,7 @@ class ViewController: UIViewController, GMSMapViewDelegate {
             }
             print(records.count)
             self.drawPath()
-            self.pathLabel?.text = "최단경로 거리: \(self.distance) 미터"
+            self.createPathLabel()
             
         }) { (error) in
             print(error.localizedDescription)
@@ -192,8 +189,6 @@ class ViewController: UIViewController, GMSMapViewDelegate {
         button.imageView?.layer.masksToBounds = true
         button.imageView?.layer.cornerRadius = 25
         button.addTarget(self, action: #selector(buttonClicked(_:)), for: .touchUpInside)
-        //        button.frame = CGRect(x: 309, y: 535, width: 70, height: 70)
-        //        button.backgroundColor = UIColor(displayP3Red:64/255, green: 179/255 , blue:  112/255, alpha: 1)
 
         self.view.addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -202,17 +197,21 @@ class ViewController: UIViewController, GMSMapViewDelegate {
         button.heightAnchor.constraint(equalToConstant: 70).isActive = true
         button.widthAnchor.constraint(equalToConstant: 70).isActive = true
 //        button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100).isActive = true
+//        button.frame = CGRect(x: 309, y: 535, width: 70, height: 70)
+//        button.backgroundColor = UIColor(displayP3Red:64/255, green: 179/255 , blue:  112/255, alpha: 1)
     }
     
-    func createPathLabel()-> UILabel? {
+    func createPathLabel() {
 //        let label: UILabel = UILabel(frame: CGRect(x: 20, y: 25, width: 200, height: 30))
         let label: UILabel = UILabel()
         label.backgroundColor = UIColor.white
         label.center = CGPoint(x: 110, y: 40)
         label.textAlignment = .center
-        label.text = "최단경로 거리: \(self.distance) 미터"
+        label.text = "최단 경로 거리 \(self.distance)m"
         label.layer.cornerRadius = 5
-        label.tintColor = UIColor.darkGray
+        label.textColor = UIColor.darkGray
+//        label.font = UIFont(name: "NanumBarunpen", size:12)
+        label.font = UIFont.systemFont(ofSize: 13.0)
         
         self.view.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -226,8 +225,6 @@ class ViewController: UIViewController, GMSMapViewDelegate {
         label.layer.shadowOpacity = 0.5
         label.layer.shadowOffset = CGSize(width: 4, height: 4)
         label.layer.masksToBounds = false // true: round
-        
-        return label
     }
     
     @IBAction func buttonClicked(_ sender: UIButton) {
