@@ -1,0 +1,64 @@
+{
+	"cities": [
+		{
+			"id": 0,
+			"title": "trash",
+			"latitude": 37.582654,
+			"longitude": 127.027278
+		},
+		{
+			"id": 1,
+			"title": "trash",
+			"latitude": 37.582655,
+			"longitude": 127.027278
+		},
+		{
+			"id": 2,
+			"title": "trash",
+			"latitude": 37.583166,
+			"longitude": 127.026008
+		},
+		{
+			"id": 3,
+			"title": "trash",
+			"latitude": 37.584382,
+			"longitude": 127.026705
+		},
+		{
+			"id": 4,
+			"title": "trash",
+			"latitude": 37.584807,
+			"longitude": 127.025981
+		},
+		{
+			"id": 5,
+			"title": "trash",
+			"latitude": 37.584739,
+			"longitude": 127.025804
+		},
+		{
+			"id": 6,
+			"title": "trash",
+			"latitude": 37.583532,
+			"longitude": 127.028261
+		},
+		{
+			"id": 7,
+			"title": "trash",
+			"latitude": 37.584425,
+			"longitude": 127.027843
+		},
+		{
+			"id": 8,
+			"title": "trash",
+			"latitude": 37.585811,
+			"longitude": 127.027277
+		},
+		{
+			"id": 9,
+			"title": "trash",
+			"latitude": 37.58431,
+			"longitude": 127.024777
+		}
+	]
+}
