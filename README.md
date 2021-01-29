@@ -11,6 +11,7 @@
 
 ### 작업 환경
 - Xcode 12, pod version 1.10, swift 5
+- **Google API KEY 필요**
 - `pod install` 후 workspace 실행
 - DS.store 충돌 사례:
 ```

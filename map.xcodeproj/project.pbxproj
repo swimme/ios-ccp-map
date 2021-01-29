@@ -9,14 +9,14 @@
 /* Begin PBXBuildFile section */
 		161CB1DB97318855BF982226 /* Pods_mapTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF44228A1F896AF5FE4AC9A8 /* Pods_mapTests.framework */; };
 		36DFB81A1AE14CAB48F6A0B6 /* Pods_map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DFA26E5A24E19BC99EBC972 /* Pods_map.framework */; };
-		3E0ABF8E25C4997C006BA513 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E0ABF8D25C4997C006BA513 /* GoogleService-Info.plist */; };
 		3E0ABF9325C49AA3006BA513 /* NanumBarunpenRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E0ABF9225C49AA3006BA513 /* NanumBarunpenRegular.ttf */; };
 		3E0ABF9425C49AA3006BA513 /* NanumBarunpenRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E0ABF9225C49AA3006BA513 /* NanumBarunpenRegular.ttf */; };
 		3E0ABF9525C49AA3006BA513 /* NanumBarunpenRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E0ABF9225C49AA3006BA513 /* NanumBarunpenRegular.ttf */; };
+		3E0ABFC625C49EF0006BA513 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E0ABFC525C49EF0006BA513 /* GoogleService-Info.plist */; };
+		3E0ABFCE25C49F13006BA513 /* secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0ABFCD25C49F13006BA513 /* secrets.swift */; };
 		3E1755A125C06B0300FEBA06 /* InitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1755A025C06B0300FEBA06 /* InitViewController.swift */; };
 		3E1755A325C0761F00FEBA06 /* Anam.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 3E1755A225C0761F00FEBA06 /* Anam.gpx */; };
 		6C01C7ACD11885BCBF605B9A /* Pods_map_mapUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B817A2ED98B31BC4A3C0F1 /* Pods_map_mapUITests.framework */; };
-		6F1C82A624E40A1F007A4430 /* secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1C82A524E40A1F007A4430 /* secrets.swift */; };
 		6FFBFF6A24E98BC900B2CB2C /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFBFF6924E98BC900B2CB2C /* Object.swift */; };
 		CE06B6EF24D7CE320041A775 /* json.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE06B6EE24D7CE320041A775 /* json.swift */; };
 		CE45085424E106BC0006EDE0 /* examplejson.json in Resources */ = {isa = PBXBuildFile; fileRef = CE45085324E106BC0006EDE0 /* examplejson.json */; };
@@ -49,14 +49,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3E0ABF8D25C4997C006BA513 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3E0ABF9225C49AA3006BA513 /* NanumBarunpenRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumBarunpenRegular.ttf; sourceTree = "<group>"; };
+		3E0ABFC525C49EF0006BA513 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "secrets/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3E0ABFCD25C49F13006BA513 /* secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = secrets.swift; path = secrets/secrets.swift; sourceTree = "<group>"; };
 		3E1755A025C06B0300FEBA06 /* InitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitViewController.swift; sourceTree = "<group>"; };
 		3E1755A225C0761F00FEBA06 /* Anam.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Anam.gpx; sourceTree = "<group>"; };
 		3FFA74B96E1014DD32DBE732 /* Pods-map-mapUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-map-mapUITests.release.xcconfig"; path = "Target Support Files/Pods-map-mapUITests/Pods-map-mapUITests.release.xcconfig"; sourceTree = "<group>"; };
 		60C4053554ACD62B44A4CA12 /* Pods-map.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-map.debug.xcconfig"; path = "Target Support Files/Pods-map/Pods-map.debug.xcconfig"; sourceTree = "<group>"; };
 		68E7DC0A2222C5CA09617353 /* Pods-mapTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mapTests.debug.xcconfig"; path = "Target Support Files/Pods-mapTests/Pods-mapTests.debug.xcconfig"; sourceTree = "<group>"; };
-		6F1C82A524E40A1F007A4430 /* secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secrets.swift; sourceTree = "<group>"; };
 		6FFBFF6924E98BC900B2CB2C /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
 		7DFA26E5A24E19BC99EBC972 /* Pods_map.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_map.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82B817A2ED98B31BC4A3C0F1 /* Pods_map_mapUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_map_mapUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,15 +153,15 @@
 				CE45085324E106BC0006EDE0 /* examplejson.json */,
 				CEE026DD24D73EB20088996A /* AppDelegate.swift */,
 				CEE026DF24D73EB20088996A /* SceneDelegate.swift */,
+				3E0ABFCD25C49F13006BA513 /* secrets.swift */,
 				3E1755A225C0761F00FEBA06 /* Anam.gpx */,
 				CE8939D025BD5946002A51AD /* ViewController.swift */,
 				3E1755A025C06B0300FEBA06 /* InitViewController.swift */,
+				3E0ABFC525C49EF0006BA513 /* GoogleService-Info.plist */,
 				CEE026E324D73EB20088996A /* Main.storyboard */,
 				3E0ABF9225C49AA3006BA513 /* NanumBarunpenRegular.ttf */,
-				3E0ABF8D25C4997C006BA513 /* GoogleService-Info.plist */,
 				6FFBFF6924E98BC900B2CB2C /* Object.swift */,
 				CE06B6EE24D7CE320041A775 /* json.swift */,
-				6F1C82A524E40A1F007A4430 /* secrets.swift */,
 				CEE026E624D73EB50088996A /* Assets.xcassets */,
 				CEE026E824D73EB50088996A /* LaunchScreen.storyboard */,
 				CEE026EB24D73EB50088996A /* Info.plist */,
@@ -310,12 +310,12 @@
 			files = (
 				3E0ABF9325C49AA3006BA513 /* NanumBarunpenRegular.ttf in Resources */,
 				CE45085424E106BC0006EDE0 /* examplejson.json in Resources */,
+				3E0ABFC625C49EF0006BA513 /* GoogleService-Info.plist in Resources */,
 				3E1755A325C0761F00FEBA06 /* Anam.gpx in Resources */,
 				CEE026EA24D73EB50088996A /* LaunchScreen.storyboard in Resources */,
 				CEE026E724D73EB50088996A /* Assets.xcassets in Resources */,
 				CEE0270E24D73EE40088996A /* Podfile in Resources */,
 				CEE026E524D73EB20088996A /* Main.storyboard in Resources */,
-				3E0ABF8E25C4997C006BA513 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,7 +480,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEE026DE24D73EB20088996A /* AppDelegate.swift in Sources */,
-				6F1C82A624E40A1F007A4430 /* secrets.swift in Sources */,
+				3E0ABFCE25C49F13006BA513 /* secrets.swift in Sources */,
 				CEE026E024D73EB20088996A /* SceneDelegate.swift in Sources */,
 				CE8939D125BD5946002A51AD /* ViewController.swift in Sources */,
 				6FFBFF6A24E98BC900B2CB2C /* Object.swift in Sources */,

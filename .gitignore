@@ -3,6 +3,11 @@
 
 **/project.pbxproj
 **/.DS_Store
+map/GoogleService-Info.plist
+map/secrets.swift
+map/secret.swift
+secrets/
+Pods/Target Support Files/
 
 ### CocoaPods ###
 ## CocoaPods GitIgnore Template
