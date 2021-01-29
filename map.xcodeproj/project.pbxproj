@@ -9,11 +9,14 @@
 /* Begin PBXBuildFile section */
 		161CB1DB97318855BF982226 /* Pods_mapTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF44228A1F896AF5FE4AC9A8 /* Pods_mapTests.framework */; };
 		36DFB81A1AE14CAB48F6A0B6 /* Pods_map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DFA26E5A24E19BC99EBC972 /* Pods_map.framework */; };
+		3E0ABF8E25C4997C006BA513 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E0ABF8D25C4997C006BA513 /* GoogleService-Info.plist */; };
+		3E0ABF9325C49AA3006BA513 /* NanumBarunpenRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E0ABF9225C49AA3006BA513 /* NanumBarunpenRegular.ttf */; };
+		3E0ABF9425C49AA3006BA513 /* NanumBarunpenRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E0ABF9225C49AA3006BA513 /* NanumBarunpenRegular.ttf */; };
+		3E0ABF9525C49AA3006BA513 /* NanumBarunpenRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E0ABF9225C49AA3006BA513 /* NanumBarunpenRegular.ttf */; };
 		3E1755A125C06B0300FEBA06 /* InitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1755A025C06B0300FEBA06 /* InitViewController.swift */; };
 		3E1755A325C0761F00FEBA06 /* Anam.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 3E1755A225C0761F00FEBA06 /* Anam.gpx */; };
 		6C01C7ACD11885BCBF605B9A /* Pods_map_mapUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B817A2ED98B31BC4A3C0F1 /* Pods_map_mapUITests.framework */; };
 		6F1C82A624E40A1F007A4430 /* secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1C82A524E40A1F007A4430 /* secrets.swift */; };
-		6FFBFF6824E979D800B2CB2C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6FFBFF6724E979D700B2CB2C /* GoogleService-Info.plist */; };
 		6FFBFF6A24E98BC900B2CB2C /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFBFF6924E98BC900B2CB2C /* Object.swift */; };
 		CE06B6EF24D7CE320041A775 /* json.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE06B6EE24D7CE320041A775 /* json.swift */; };
 		CE45085424E106BC0006EDE0 /* examplejson.json in Resources */ = {isa = PBXBuildFile; fileRef = CE45085324E106BC0006EDE0 /* examplejson.json */; };
@@ -46,13 +49,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E0ABF8D25C4997C006BA513 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3E0ABF9225C49AA3006BA513 /* NanumBarunpenRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumBarunpenRegular.ttf; sourceTree = "<group>"; };
 		3E1755A025C06B0300FEBA06 /* InitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitViewController.swift; sourceTree = "<group>"; };
 		3E1755A225C0761F00FEBA06 /* Anam.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Anam.gpx; sourceTree = "<group>"; };
 		3FFA74B96E1014DD32DBE732 /* Pods-map-mapUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-map-mapUITests.release.xcconfig"; path = "Target Support Files/Pods-map-mapUITests/Pods-map-mapUITests.release.xcconfig"; sourceTree = "<group>"; };
 		60C4053554ACD62B44A4CA12 /* Pods-map.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-map.debug.xcconfig"; path = "Target Support Files/Pods-map/Pods-map.debug.xcconfig"; sourceTree = "<group>"; };
 		68E7DC0A2222C5CA09617353 /* Pods-mapTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mapTests.debug.xcconfig"; path = "Target Support Files/Pods-mapTests/Pods-mapTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6F1C82A524E40A1F007A4430 /* secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secrets.swift; sourceTree = "<group>"; };
-		6FFBFF6724E979D700B2CB2C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6FFBFF6924E98BC900B2CB2C /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
 		7DFA26E5A24E19BC99EBC972 /* Pods_map.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_map.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82B817A2ED98B31BC4A3C0F1 /* Pods_map_mapUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_map_mapUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,7 +157,8 @@
 				CE8939D025BD5946002A51AD /* ViewController.swift */,
 				3E1755A025C06B0300FEBA06 /* InitViewController.swift */,
 				CEE026E324D73EB20088996A /* Main.storyboard */,
-				6FFBFF6724E979D700B2CB2C /* GoogleService-Info.plist */,
+				3E0ABF9225C49AA3006BA513 /* NanumBarunpenRegular.ttf */,
+				3E0ABF8D25C4997C006BA513 /* GoogleService-Info.plist */,
 				6FFBFF6924E98BC900B2CB2C /* Object.swift */,
 				CE06B6EE24D7CE320041A775 /* json.swift */,
 				6F1C82A524E40A1F007A4430 /* secrets.swift */,
@@ -303,13 +308,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E0ABF9325C49AA3006BA513 /* NanumBarunpenRegular.ttf in Resources */,
 				CE45085424E106BC0006EDE0 /* examplejson.json in Resources */,
 				3E1755A325C0761F00FEBA06 /* Anam.gpx in Resources */,
 				CEE026EA24D73EB50088996A /* LaunchScreen.storyboard in Resources */,
 				CEE026E724D73EB50088996A /* Assets.xcassets in Resources */,
 				CEE0270E24D73EE40088996A /* Podfile in Resources */,
 				CEE026E524D73EB20088996A /* Main.storyboard in Resources */,
-				6FFBFF6824E979D800B2CB2C /* GoogleService-Info.plist in Resources */,
+				3E0ABF8E25C4997C006BA513 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +323,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E0ABF9425C49AA3006BA513 /* NanumBarunpenRegular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +331,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E0ABF9525C49AA3006BA513 /* NanumBarunpenRegular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,13 +661,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Z7ZR296ZWX;
 				INFOPLIST_FILE = map/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = net.CCP.map;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ccp.map;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -674,13 +682,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4G7TG4K5F2;
+				DEVELOPMENT_TEAM = Z7ZR296ZWX;
 				INFOPLIST_FILE = map/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = net.CCP.map;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ccp.map;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

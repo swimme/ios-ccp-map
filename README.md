@@ -19,7 +19,7 @@
 - 빌드 버전 충돌 사례:
     - cocoapods version 1.10 이상 확인
     - build target 버전 확인 
-
+- bundle id 일치 확인: com.ccp.map
 
 ### 화면
 <div style="display:flex; flex-direction:row">
