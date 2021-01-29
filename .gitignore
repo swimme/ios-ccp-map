@@ -9,7 +9,7 @@ map/secret.swift
 secrets/
 Pods/Target Support Files/
 
-### CocoaPods ###
+:### CocoaPods ###
 ## CocoaPods GitIgnore Template
 
 # CocoaPods - Only use to conserve bandwidth / Save time on Pushing

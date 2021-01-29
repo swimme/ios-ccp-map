@@ -19,7 +19,6 @@
 		6C01C7ACD11885BCBF605B9A /* Pods_map_mapUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B817A2ED98B31BC4A3C0F1 /* Pods_map_mapUITests.framework */; };
 		6FFBFF6A24E98BC900B2CB2C /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFBFF6924E98BC900B2CB2C /* Object.swift */; };
 		CE06B6EF24D7CE320041A775 /* json.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE06B6EE24D7CE320041A775 /* json.swift */; };
-		CE45085424E106BC0006EDE0 /* examplejson.json in Resources */ = {isa = PBXBuildFile; fileRef = CE45085324E106BC0006EDE0 /* examplejson.json */; };
 		CE8939D125BD5946002A51AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8939D025BD5946002A51AD /* ViewController.swift */; };
 		CEE026DE24D73EB20088996A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE026DD24D73EB20088996A /* AppDelegate.swift */; };
 		CEE026E024D73EB20088996A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE026DF24D73EB20088996A /* SceneDelegate.swift */; };
@@ -64,7 +63,6 @@
 		B5822B61A378918FEEBBE40C /* Pods-map-mapUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-map-mapUITests.debug.xcconfig"; path = "Target Support Files/Pods-map-mapUITests/Pods-map-mapUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B6439C81F2BB04F7788FE991 /* Pods-mapTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mapTests.release.xcconfig"; path = "Target Support Files/Pods-mapTests/Pods-mapTests.release.xcconfig"; sourceTree = "<group>"; };
 		CE06B6EE24D7CE320041A775 /* json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = json.swift; sourceTree = "<group>"; };
-		CE45085324E106BC0006EDE0 /* examplejson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = examplejson.json; sourceTree = SOURCE_ROOT; };
 		CE8939D025BD5946002A51AD /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = SOURCE_ROOT; };
 		CEE026DA24D73EB20088996A /* map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = map.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE026DD24D73EB20088996A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -150,7 +148,6 @@
 		CEE026DC24D73EB20088996A /* map */ = {
 			isa = PBXGroup;
 			children = (
-				CE45085324E106BC0006EDE0 /* examplejson.json */,
 				CEE026DD24D73EB20088996A /* AppDelegate.swift */,
 				CEE026DF24D73EB20088996A /* SceneDelegate.swift */,
 				3E0ABFCD25C49F13006BA513 /* secrets.swift */,
@@ -309,7 +306,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E0ABF9325C49AA3006BA513 /* NanumBarunpenRegular.ttf in Resources */,
-				CE45085424E106BC0006EDE0 /* examplejson.json in Resources */,
 				3E0ABFC625C49EF0006BA513 /* GoogleService-Info.plist in Resources */,
 				3E1755A325C0761F00FEBA06 /* Anam.gpx in Resources */,
 				CEE026EA24D73EB50088996A /* LaunchScreen.storyboard in Resources */,
